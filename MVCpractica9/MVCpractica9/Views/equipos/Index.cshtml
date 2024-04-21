@@ -1,0 +1,128 @@
+﻿﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    <h1>Mantenimiento de Equipos</h1>
+    <br />
+    <form asp-action="CrearEquipos">
+        @*Inicio del Formulario*@
+
+        <Div class="form-group row mb-4">
+            @*Label y input de Nombre de Equipo*@
+            <div class="col-sm-2">
+                <label>Nombre</label>
+            </Div>
+            <div class="col-sm-4">
+                @Html.TextBox("nombre","",new {@class="form-control"})
+            </Div>
+
+            @*Label y input de descripcion de Equipo*@
+            <div class="col-sm-2">
+                @Html.Label("lblDescripcion","Descripción")
+            </Div>
+            <div class="col-sm-4">
+                @Html.TextArea("descripcion","",new {@class="form-control", @placeholder="Ingrese la descripción"})
+            </Div>
+
+            @*Label y input de Tipo de equipo*@
+            <div class="col-sm-2 mb-3">
+                @Html.Label("lblTipoEquipo","Tipo de Equipo")
+            </Div>
+            <div class="col-sm-4 mb-3">
+                @Html.DropDownList("tipo_equipo_id", ViewData["listadoDetipo_equipo"] as SelectList, "Seleccione un tipo", new {@class = "form-control"})
+            </Div>
+            <div class="col-sm-2"></Div>
+            <div class="col-sm-4"></Div>
+
+            @*Label y input de Id de Marca*@
+            <div class="col-sm-2 mb-3">
+                @Html.Label("lblMarca","Marca")
+            </Div>
+            <div class="col-sm-4 mb-3">
+                @Html.DropDownList("marca_id", ViewData["listadoDeMarcas"] as SelectList, "Seleccione una marca", new {@class = "form-control"})
+            </Div>
+
+            @*Label y input de modelo de Equipo*@
+            <div class="col-sm-2 mb-3">
+                <label>Modelo</label>
+            </Div>
+            <div class="col-sm-4 mb-3">
+                @Html.TextBox("modelo","",new {@class="form-control"})
+            </Div>
+
+            @*Label y input de Anio de compra*@
+            <div class="col-sm-2 mb-3">
+                <label>Año de compra</label>
+            </Div>
+            <div class="col-sm-4 mb-3">
+                @Html.TextBox("anio_compra","",new {@class="form-control"})
+            </Div>
+
+            @*Label y input de Costo de equipo*@
+            <div class="col-sm-2 mb-3">
+                <label>Costo</label>
+            </Div>
+            <div class="col-sm-4 mb-3">
+                @Html.TextBox("costo","",new {@class="form-control"})
+            </Div>
+
+            @*Label y input de vida util de Equipo*@
+            <div class="col-sm-2 mb-3">
+                <label>Vida Util</label>
+            </Div>
+            <div class="col-sm-4 mb-3">
+                @Html.TextBox("vida_util","",new {@class="form-control"})
+            </Div>
+
+            @*Label y input de estado de Equipo*@
+            <div class="col-sm-2 mb-3">
+                @Html.Label("lblEstadoEquipo","Estado de Equipo")
+            </Div>
+            <div class="col-sm-4 mb-3">
+                @Html.DropDownList("estado_equipo_id", ViewData["listadoDeestado_equipo"] as SelectList, "Seleccione un estado de equipo", new {@class = "form-control"})
+            </Div>
+
+            <div class="form-group row mb-4">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-4">
+                    <input type="checkbox" id="estado" name="estado" value="true">
+                    <label class="form-check-label">
+                        Inactivo
+                    </label>
+                </div>
+            </Div>
+
+            <div class="form-group row mb-4">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-4">
+                    <input type="submit" class="btn btn-primary" value="Guardar"/>
+                </div>
+            </Div>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Equipo</th>
+                        <th>Descripción</th>
+                        <th>Marca</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var equipo in (IEnumerable<dynamic>)ViewData["listadoEquipo"])
+                    {
+                        <tr>
+                            <td>@equipo.nombre</td>
+                            <td>@equipo.descripcion</td>
+                            <td>@equipo.marca_nombre</td>
+                            <td> <a asp-action="Delete" asp-route-id="@equipo.id_equipo">Delete</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </Div>
+
+        @*Fin del Formulario*@
+    </form>
+}
